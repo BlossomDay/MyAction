@@ -1,1 +1,16 @@
-
+name: Build Docker Image
+on: push
+env:
+  val: "infor"
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build Docker Image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          tags: registry.cn-hangzhou.aliyuncs.com/edward_space/action_test:v1
+          build-args: VAL=${{ env.val }}
+          file: ./Dockerfile
